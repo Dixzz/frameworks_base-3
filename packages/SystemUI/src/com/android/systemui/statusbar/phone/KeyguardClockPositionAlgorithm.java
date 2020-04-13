@@ -49,6 +49,11 @@ public class KeyguardClockPositionAlgorithm {
     private int mHeight;
 
     /**
+     * Allow using the default clock Y calculations
+     */
+    public static int CLOCK_USE_DEFAULT_Y = -1;
+
+    /**
      * Height of {@link KeyguardStatusView}.
      */
     private int mKeyguardStatusHeight;
