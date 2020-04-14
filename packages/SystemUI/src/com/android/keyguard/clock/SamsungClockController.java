@@ -92,8 +92,8 @@ public class SamsungClockController implements ClockPlugin {
                 .inflate(R.layout.digital_clock_custom, null);
         mClock = mView.findViewById(R.id.clock);
         mClock.setLineSpacing(0, 0.8f);
-        mClock.setFormat12Hour(Html.fromHtml("<font color=" + mResources.getColor(R.color.system_light_accent) + ">hh</font>" + "mm"));
-        mClock.setFormat24Hour("kk\nmm");
+        mClock.setFormat12Hour(Html.fromHtml("<font color=" + mResources.getColor(R.color.system_light_accent) + ">hh</font><br>mm"));
+        mClock.setFormat24Hour(Html.fromHtml("<font color=" + mResources.getColor(R.color.system_light_accent) + ">kk</font><br>mm"));
     }
 
     @Override
@@ -123,8 +123,8 @@ public class SamsungClockController implements ClockPlugin {
         View previewView = mLayoutInflater.inflate(R.layout.default_clock_preview, null);
         TextClock previewTime = previewView.findViewById(R.id.time);
         previewTime.setLineSpacing(0, 0.8f);
-        previewTime.setFormat12Hour(Html.fromHtml("<font color=" + mResources.getColor(R.color.system_light_accent) + ">hh</font>" + "mm"));
-        previewTime.setFormat24Hour("kk\nmm");
+        mClock.setFormat12Hour(Html.fromHtml("<font color=" + mResources.getColor(R.color.system_light_accent) + ">hh</font><br>mm"));
+        mClock.setFormat24Hour(Html.fromHtml("<font color=" + mResources.getColor(R.color.system_light_accent) + ">kk</font><br>mm"));
         TextClock previewDate = previewView.findViewById(R.id.date);
 
         // Initialize state of plugin before generating preview.

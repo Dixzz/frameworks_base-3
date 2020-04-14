@@ -3589,11 +3589,13 @@ public class StatusBar extends SystemUI implements DemoMode,
         int resourceIdRadius = (int) mContext.getResources().getDimension(com.android.internal.R.dimen.rounded_corner_radius);
         int resourceIdPadding = (int) mContext.getResources().getDimension(R.dimen.rounded_corner_content_padding);
         int resourceIdSBPadding = (int) mContext.getResources().getDimension(R.dimen.status_bar_extra_padding);
+        int resourceIdVolumeRadius = (int) mContext.getResources().getDimension(R.dimen.corner_size);
 
         // Values on framework resources
         int cornerRadiusRes = (int) (resourceIdRadius / density);
         int contentPaddingRes = (int) (resourceIdPadding / density);
         int sbPaddingRes = (int) (resourceIdSBPadding / density);
+        int volumeRadiusRes = (int) (resourceIdVolumeRadius  / density);
 
         // Values in Settings DBs
         int cornerRadius = Settings.Secure.getIntForUser(mContext.getContentResolver(),
@@ -3602,9 +3604,11 @@ public class StatusBar extends SystemUI implements DemoMode,
                 Settings.Secure.SYSUI_ROUNDED_CONTENT_PADDING, contentPaddingRes, UserHandle.USER_CURRENT);
         int sbPadding = Settings.Secure.getIntForUser(mContext.getContentResolver(),
                 Settings.Secure.SYSUI_STATUS_BAR_PADDING, contentPaddingRes, UserHandle.USER_CURRENT);
+        int volumeRadius = Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                Settings.Secure.VOLUME_ROUNDED_SIZE, volumeRadiusRes, UserHandle.USER_CURRENT);
 
         return (cornerRadiusRes == cornerRadius) && (contentPaddingRes == contentPadding) &&
-                (sbPaddingRes == sbPadding);
+                (sbPaddingRes == sbPadding) && (volumeRadiusRes == volumeRadius);
     }
 
     /**
@@ -3624,8 +3628,8 @@ public class StatusBar extends SystemUI implements DemoMode,
     }
 
     private void updateCorners() {
-        if (mSysuiRoundedFwvals && !isCurrentRoundedSameAsFw()) {
             float density = Resources.getSystem().getDisplayMetrics().density;
+        if (mSysuiRoundedFwvals && !isCurrentRoundedSameAsFw()) {
             int resourceIdRadius = (int) mContext.getResources().getDimension(com.android.internal.R.dimen.rounded_corner_radius);
             Settings.Secure.putIntForUser(mContext.getContentResolver(),
                 Settings.Secure.SYSUI_ROUNDED_SIZE, (int) (resourceIdRadius / density), UserHandle.USER_CURRENT);
@@ -3636,6 +3640,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             Settings.Secure.putIntForUser(mContext.getContentResolver(),
                 Settings.Secure.SYSUI_STATUS_BAR_PADDING, (int) (resourceIdSBPadding / density), UserHandle.USER_CURRENT);
         }
+            int resourceIdVolumeRadius  = (int) mContext.getResources().getDimension(R.dimen.corner_size);
+            Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                Settings.Secure.VOLUME_ROUNDED_SIZE, (int) (resourceIdVolumeRadius / density), UserHandle.USER_CURRENT);
     }
 
     private void updateDozingState() {
