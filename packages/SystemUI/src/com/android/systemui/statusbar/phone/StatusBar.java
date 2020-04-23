@@ -16,6 +16,8 @@
 
 package com.android.systemui.statusbar.phone;
 
+import android.util.Log;
+
 import static android.app.ActivityTaskManager.SPLIT_SCREEN_CREATE_MODE_BOTTOM_OR_RIGHT;
 import static android.app.ActivityTaskManager.SPLIT_SCREEN_CREATE_MODE_TOP_OR_LEFT;
 import static android.app.StatusBarManager.WINDOW_STATE_HIDDEN;
@@ -3590,13 +3592,15 @@ public class StatusBar extends SystemUI implements DemoMode,
         int resourceIdPadding = (int) mContext.getResources().getDimension(R.dimen.rounded_corner_content_padding);
         int resourceIdSBPadding = (int) mContext.getResources().getDimension(R.dimen.status_bar_extra_padding);
         int resourceIdVolumeRadius = (int) mContext.getResources().getDimension(R.dimen.corner_size);
-
+        String a = String.valueOf(resourceIdVolumeRadius);
+        Log.d("shit1", a);
         // Values on framework resources
         int cornerRadiusRes = (int) (resourceIdRadius / density);
         int contentPaddingRes = (int) (resourceIdPadding / density);
         int sbPaddingRes = (int) (resourceIdSBPadding / density);
         int volumeRadiusRes = (int) (resourceIdVolumeRadius  / density);
-
+        String b = String.valueOf(volumeRadiusRes);
+        Log.d("shit2", b);
         // Values in Settings DBs
         int cornerRadius = Settings.Secure.getIntForUser(mContext.getContentResolver(),
                 Settings.Secure.SYSUI_ROUNDED_SIZE, cornerRadiusRes, UserHandle.USER_CURRENT);
@@ -3607,6 +3611,12 @@ public class StatusBar extends SystemUI implements DemoMode,
         int volumeRadius = Settings.Secure.getIntForUser(mContext.getContentResolver(),
                 Settings.Secure.VOLUME_ROUNDED_SIZE, volumeRadiusRes, UserHandle.USER_CURRENT);
 
+        String c = String.valueOf(volumeRadius);
+        Log.d("shit3", c);
+        String d = Boolean.toString(volumeRadiusRes == volumeRadius);
+        Log.d("shit4", d);
+        String z = Boolean.toString(sbPaddingRes == sbPadding);
+        Log.d("shit5", z);
         return (cornerRadiusRes == cornerRadius) && (contentPaddingRes == contentPadding) &&
                 (sbPaddingRes == sbPadding) && (volumeRadiusRes == volumeRadius);
     }
@@ -3641,6 +3651,8 @@ public class StatusBar extends SystemUI implements DemoMode,
                 Settings.Secure.SYSUI_STATUS_BAR_PADDING, (int) (resourceIdSBPadding / density), UserHandle.USER_CURRENT);
         }
             int resourceIdVolumeRadius  = (int) mContext.getResources().getDimension(R.dimen.corner_size);
+            String e = String.valueOf(resourceIdVolumeRadius);
+            Log.d("shit5", e);
             Settings.Secure.putIntForUser(mContext.getContentResolver(),
                 Settings.Secure.VOLUME_ROUNDED_SIZE, (int) (resourceIdVolumeRadius / density), UserHandle.USER_CURRENT);
     }
